@@ -32,6 +32,7 @@ function generatePassword() {
   var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
   var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
   var storedOptions = [];
+  var randomPassword = "";
 
   if (confirmSpecialCharacters) {
     storedOptions.push(specialCharacters);
@@ -53,6 +54,31 @@ function generatePassword() {
     storedOptions.push(specialCharacters);
   }
 
+  function randomize(min, max) {
+    if (!max) {
+      max = min
+      min = 0
+    }
+    var ran = Math.random()
+    return Math.floor(min*(1- ran) + ran*max)
+  }
+  
+  function randomizing(list) {
+    return list[randomize(list.length)]
+  }
+  
+
+  for (var i = 0; i < characterLength; i++) {
+    var randomList = randomizing(storedOptions);
+    var randomChar = randomizing(randomList);
+    randomPassword += randomChar
+  }
+
+  console.log(storedOptions)
+
+  console.log(randomPassword)
+
+  return randomPassword
 }
 
 
